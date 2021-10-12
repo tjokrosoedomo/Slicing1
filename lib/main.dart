@@ -832,15 +832,26 @@ class Orderpage extends StatelessWidget {
             )
         ),
         body: Container(
-          padding: EdgeInsets.only(top: 30),
+          padding: EdgeInsets.only(top: 30, left: 20),
           child: Column(
             children: [
               Row(
                 children: [
                   Image.asset('Assets/Images/restoran.png'),
+                  SizedBox(
+                    width: 20,
+                  ),
                   Column(
                     children: [
                       Text('Dogmie jagong tutung'),
+                      Row(
+                        children: [
+                          Image.asset('Assets/Images/like.png'),
+                          Text('999+ |'),
+                          Image.asset('Assets/Images/dislike.png'),
+                          Text('93+')
+                        ],
+                      ),
                       Text(
                         '\$99.99',
                         style: TextStyle(color: Color(0xff2ECC71)),
@@ -848,21 +859,41 @@ class Orderpage extends StatelessWidget {
                     ],
                   ),
                   OutlinedButton(
+                      style: ElevatedButton.styleFrom(
+                          shape: CircleBorder()
+                      ),
                 onPressed: null,
                     child: Image.asset('Assets/Images/dislike.png')
             ),
                   OutlinedButton(
+                      style: ElevatedButton.styleFrom(
+                          shape: CircleBorder()
+                      ),
                 onPressed: null,
                     child: Image.asset('Assets/Images/like.png')
             ),
           ],
       ),
+            SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
             Image.asset('Assets/Images/restoran.png'),
+                SizedBox(
+                  width: 20,
+                ),
             Column(
               children: [
                 Text('Dogmie jagong tutung'),
+                Row(
+                  children: [
+                    Image.asset('Assets/Images/like.png'),
+                    Text('999+ |'),
+                    Image.asset('Assets/Images/dislike.png'),
+                    Text('93+')
+                  ],
+                ),
                 Text('\$99.99',
                   style: TextStyle(
                       color: Color(0xff2ECC71)
@@ -871,21 +902,41 @@ class Orderpage extends StatelessWidget {
               ],
             ),
             OutlinedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: CircleBorder()
+                ),
                 onPressed: null,
                 child: Image.asset('Assets/Images/dislike.png')
             ),
             OutlinedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: CircleBorder()
+                ),
                 onPressed: null,
                 child: Image.asset('Assets/Images/like.png')
             ),
           ],
       ),
+              SizedBox(
+                height: 20,
+              ),
             Row(
           children: [
             Image.asset('Assets/Images/restoran.png'),
+            SizedBox(
+              width: 20,
+            ),
             Column(
               children: [
                 Text('Dogmie jagong tutung'),
+                Row(
+                  children: [
+                    Image.asset('Assets/Images/like.png'),
+                    Text('999+ |'),
+                    Image.asset('Assets/Images/dislike.png'),
+                    Text('93+')
+                  ],
+                ),
                 Text('\$99.99',
                   style: TextStyle(
                       color: Color(0xff2ECC71)
@@ -894,17 +945,23 @@ class Orderpage extends StatelessWidget {
               ],
             ),
             OutlinedButton(
+              style: ElevatedButton.styleFrom(
+                  shape: CircleBorder()
+              ),
                 onPressed: null,
                 child: Image.asset('Assets/Images/dislike.png')
             ),
             OutlinedButton(
+              style: ElevatedButton.styleFrom(
+                shape: CircleBorder()
+              ),
                 onPressed: null,
                 child: Image.asset('Assets/Images/like.png')
             ),
           ],
       ),
             SizedBox(
-          height: 25,
+          height: 250,
       ),
             ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -1218,7 +1275,8 @@ class Paymentpage extends StatelessWidget {
                 Navigator.pop(context);
               },
             )),
-        body: Column(children: [
+        body: Column(
+            children: [
           SizedBox(
             height: 50,
           ),
@@ -1489,30 +1547,14 @@ class Voucherpage extends StatelessWidget {
                       ),
                     ],
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          color: Color(0xffECF0F1)),
-                      child: Image.asset('Assets/Images/voucher.png')),
-                  Column(
-                    children: [
-                      Text('Sale off 30% for Pizza'),
-                      Row(children: [
-                        Icon(Icons.watch_later_outlined),
-                        Text('Apr 10 - Apr 30'),
-                      ]),
-                      Text(
-                        '11 days left',
-                        style: TextStyle(color: Color(0xffE74C3C)),
+                  OutlinedButton(
+                      style: ElevatedButton.styleFrom(
+                          shape: CircleBorder()
+                      ),
+                      onPressed: null,
+                      child: Icon(Icons.check,
+                      color: Colors.white
                       )
-                    ],
                   ),
                 ],
               ),
@@ -1539,6 +1581,39 @@ class Voucherpage extends StatelessWidget {
                       )
                     ],
                   ),
+                  OutlinedButton(
+                      style: ElevatedButton.styleFrom(shape: CircleBorder()),
+                      onPressed: null,
+                      child: Icon(Icons.check, color: Colors.white)),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          color: Color(0xffECF0F1)),
+                      child: Image.asset('Assets/Images/voucher.png')),
+                  Column(
+                    children: [
+                      Text('Sale off 30% for Pizza'),
+                      Row(children: [
+                        Icon(Icons.watch_later_outlined),
+                        Text('Apr 10 - Apr 30'),
+                      ]),
+                      Text(
+                        '11 days left',
+                        style: TextStyle(color: Color(0xffE74C3C)),
+                      )
+                    ],
+                  ),
+                  OutlinedButton(
+                      style: ElevatedButton.styleFrom(shape: CircleBorder()),
+                      onPressed: null,
+                      child: Icon(Icons.check, color: Colors.white)),
                 ],
               ),
               SizedBox(
