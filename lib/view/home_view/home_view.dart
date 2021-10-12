@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class Homepage extends StatefulWidget {
@@ -9,58 +8,57 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  int _currentIndex = 0;
-  late List<Widget> _children;
-  final Key keyOne = PageStorageKey('Profilepage');
+  final List<Widget> _children = [
+    Housepage(),
+    Orderpage(),
+    Paypalpage(),
+    Profilepage(),
+  ];
 
-  @override
-  void initState(){
-    _children = [
-      Housepage(key: keyOne),
-      Orderpage(),
-      Paypalpage(),
-      Profilepage(),
-    ];
-    super.initState();
+  void onTabTapped(int index, BuildContext context) {
+    print(index);
+    setState(() {
+       DefaultTabController.of(context)?.animateTo(index);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage('Assets/Images/store.png')),
-            label: 'Home',
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: TabBarView(children: _children),
+        bottomNavigationBar: Builder(
+          builder: (context) => BottomNavigationBar(
+            onTap: (val) => onTabTapped(val, context),
+            type: BottomNavigationBarType.fixed,
+            currentIndex: DefaultTabController.of(context)?.index ?? 0,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage('Assets/Images/store.png')),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage('Assets/Images/shoppinglist.png')),
+                label: 'Order',
+              ),
+              BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage('Assets/Images/list.png')),
+                label: 'My List',
+              ),
+              BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage('Assets/Images/user.png')),
+                label: 'Profile',
+              ),
+            ],
+            selectedItemColor: Color(0xffD35400),
+            unselectedItemColor: Colors.black87,
+            showUnselectedLabels: true,
           ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage('Assets/Images/shoppinglist.png')),
-            label: 'Order',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage('Assets/Images/list.png')),
-            label: 'My List',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage('Assets/Images/user.png')),
-            label: 'Profile',
-          ),
-        ],
-        selectedItemColor: Color(0xffD35400),
-        unselectedItemColor: Colors.black87,
-        showUnselectedLabels: true,
+        ),
       ),
-      );
-  }
-  void onTabTapped(int index){
-    setState(() {
-      _currentIndex = index;
-    });
+    );
   }
 }
 
@@ -333,10 +331,9 @@ class Orderpage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text('Review Food',
-            style: TextStyle(
-              color: Colors.black
-            ),
+            title: Text(
+              'Review Food',
+              style: TextStyle(color: Colors.black),
             ),
             backgroundColor: Colors.white,
             centerTitle: true,
@@ -348,8 +345,7 @@ class Orderpage extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-            )
-        ),
+            )),
         body: Container(
           padding: EdgeInsets.only(top: 30, left: 20),
           child: Column(
@@ -378,131 +374,106 @@ class Orderpage extends StatelessWidget {
                     ],
                   ),
                   OutlinedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: CircleBorder()
-                      ),
-                onPressed: null,
-                    child: Image.asset('Assets/Images/dislike.png')
-            ),
+                      style: ElevatedButton.styleFrom(shape: CircleBorder()),
+                      onPressed: null,
+                      child: Image.asset('Assets/Images/dislike.png')),
                   OutlinedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: CircleBorder()
-                      ),
-                onPressed: null,
-                    child: Image.asset('Assets/Images/like.png')
-            ),
-          ],
-      ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-            Image.asset('Assets/Images/restoran.png'),
-                SizedBox(
-                  width: 20,
-                ),
-            Column(
-              children: [
-                Text('Dogmie jagong tutung'),
-                Row(
-                  children: [
-                    Image.asset('Assets/Images/like.png'),
-                    Text('999+ |'),
-                    Image.asset('Assets/Images/dislike.png'),
-                    Text('93+')
-                  ],
-                ),
-                Text('\$99.99',
-                  style: TextStyle(
-                      color: Color(0xff2ECC71)
-                  ),
-                )
-              ],
-            ),
-            OutlinedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: CircleBorder()
-                ),
-                onPressed: null,
-                child: Image.asset('Assets/Images/dislike.png')
-            ),
-            OutlinedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: CircleBorder()
-                ),
-                onPressed: null,
-                child: Image.asset('Assets/Images/like.png')
-            ),
-          ],
-      ),
+                      style: ElevatedButton.styleFrom(shape: CircleBorder()),
+                      onPressed: null,
+                      child: Image.asset('Assets/Images/like.png')),
+                ],
+              ),
               SizedBox(
                 height: 20,
               ),
-            Row(
-          children: [
-            Image.asset('Assets/Images/restoran.png'),
-            SizedBox(
-              width: 20,
-            ),
-            Column(
-              children: [
-                Text('Dogmie jagong tutung'),
-                Row(
-                  children: [
-                    Image.asset('Assets/Images/like.png'),
-                    Text('999+ |'),
-                    Image.asset('Assets/Images/dislike.png'),
-                    Text('93+')
-                  ],
-                ),
-                Text('\$99.99',
-                  style: TextStyle(
-                      color: Color(0xff2ECC71)
+              Row(
+                children: [
+                  Image.asset('Assets/Images/restoran.png'),
+                  SizedBox(
+                    width: 20,
                   ),
-                )
-              ],
-            ),
-            OutlinedButton(
-              style: ElevatedButton.styleFrom(
-                  shape: CircleBorder()
+                  Column(
+                    children: [
+                      Text('Dogmie jagong tutung'),
+                      Row(
+                        children: [
+                          Image.asset('Assets/Images/like.png'),
+                          Text('999+ |'),
+                          Image.asset('Assets/Images/dislike.png'),
+                          Text('93+')
+                        ],
+                      ),
+                      Text(
+                        '\$99.99',
+                        style: TextStyle(color: Color(0xff2ECC71)),
+                      )
+                    ],
+                  ),
+                  OutlinedButton(
+                      style: ElevatedButton.styleFrom(shape: CircleBorder()),
+                      onPressed: null,
+                      child: Image.asset('Assets/Images/dislike.png')),
+                  OutlinedButton(
+                      style: ElevatedButton.styleFrom(shape: CircleBorder()),
+                      onPressed: null,
+                      child: Image.asset('Assets/Images/like.png')),
+                ],
               ),
-                onPressed: null,
-                child: Image.asset('Assets/Images/dislike.png')
-            ),
-            OutlinedButton(
-              style: ElevatedButton.styleFrom(
-                shape: CircleBorder()
+              SizedBox(
+                height: 20,
               ),
-                onPressed: null,
-                child: Image.asset('Assets/Images/like.png')
-            ),
-          ],
-      ),
-            SizedBox(
-          height: 250,
-      ),
-            ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                primary: Color(0xffD35400),
-                onPrimary: Colors.white,
-                minimumSize: Size(330,45),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(55)
-                )
-            ),
-            child: Text('Send'),
-            onPressed: () {
-              Navigator.pop(context);
-            }
-      ),
-    ],
-    ),
-        )
-    );
+              Row(
+                children: [
+                  Image.asset('Assets/Images/restoran.png'),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Column(
+                    children: [
+                      Text('Dogmie jagong tutung'),
+                      Row(
+                        children: [
+                          Image.asset('Assets/Images/like.png'),
+                          Text('999+ |'),
+                          Image.asset('Assets/Images/dislike.png'),
+                          Text('93+')
+                        ],
+                      ),
+                      Text(
+                        '\$99.99',
+                        style: TextStyle(color: Color(0xff2ECC71)),
+                      )
+                    ],
+                  ),
+                  OutlinedButton(
+                      style: ElevatedButton.styleFrom(shape: CircleBorder()),
+                      onPressed: null,
+                      child: Image.asset('Assets/Images/dislike.png')),
+                  OutlinedButton(
+                      style: ElevatedButton.styleFrom(shape: CircleBorder()),
+                      onPressed: null,
+                      child: Image.asset('Assets/Images/like.png')),
+                ],
+              ),
+              SizedBox(
+                height: 250,
+              ),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Color(0xffD35400),
+                      onPrimary: Colors.white,
+                      minimumSize: Size(330, 45),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(55))),
+                  child: Text('Send'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            ],
+          ),
+        ));
   }
 }
-
 
 class Profilepage extends StatelessWidget {
   const Profilepage({Key? key}) : super(key: key);
@@ -521,144 +492,106 @@ class Profilepage extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Text('Itoh',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20),
+          Text(
+            'Itoh',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
             height: 10,
           ),
-          Text('+1 11229382748',
-          textAlign: TextAlign.center,),
+          Text(
+            '+1 11229382748',
+            textAlign: TextAlign.center,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('My Profile',
-                style: TextStyle(
-                color: Colors.black,)
-              ),
-              IconButton(
-                  onPressed: (){},
-                  icon: Icon(Icons.arrow_forward_ios)
-              )
+                  style: TextStyle(
+                    color: Colors.black,
+                  )),
+              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward_ios))
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Change Password',
-          style: TextStyle(
-          color: Colors.black
-          )
-              ),
+              Text('Change Password', style: TextStyle(color: Colors.black)),
               IconButton(
                   onPressed: () {
-                  Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Passwordpage()
-                ),
-                );
-              },
-                  icon: Icon(Icons.arrow_forward_ios)
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Payment Settings',
-          style: TextStyle(
-          color: Colors.black
-          )
-              ),
-              IconButton(
-                  onPressed: () {
-                  Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Paymentpage()
-                ),
-                );
-              },
-                  icon: Icon(Icons.arrow_forward_ios)
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('My Voucher',
-          style: TextStyle(
-          color: Colors.black)
-              ),
-              IconButton(
-                    onPressed: () {
                     Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Voucherpage()
-                    ),
+                      context,
+                      MaterialPageRoute(builder: (context) => Passwordpage()),
                     );
                   },
-                  icon: Icon(Icons.arrow_forward_ios)
-              )
+                  icon: Icon(Icons.arrow_forward_ios))
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Notification',
-          style: TextStyle(
-          color: Colors.black)
-              ),
+              Text('Payment Settings', style: TextStyle(color: Colors.black)),
               IconButton(
-                  onPressed: (){},
-                  icon: Icon(Icons.arrow_forward_ios)
-              )
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Paymentpage()),
+                    );
+                  },
+                  icon: Icon(Icons.arrow_forward_ios))
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('About Us',
-              style: TextStyle(
-                  color: Colors.black)
-          ),
+              Text('My Voucher', style: TextStyle(color: Colors.black)),
               IconButton(
-                onPressed: (){},
-                icon: Icon(Icons.arrow_forward_ios)
-              ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Voucherpage()),
+                    );
+                  },
+                  icon: Icon(Icons.arrow_forward_ios))
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Contact Us',
-                  style: TextStyle(
-                      color: Colors.black)
-              ),
-              IconButton(
-                  onPressed: (){},
-                  icon: Icon(Icons.arrow_forward_ios)
-              )
+              Text('Notification', style: TextStyle(color: Colors.black)),
+              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward_ios))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('About Us', style: TextStyle(color: Colors.black)),
+              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward_ios)),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Contact Us', style: TextStyle(color: Colors.black)),
+              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward_ios))
             ],
           ),
           SizedBox(
             height: 40,
           ),
           ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: Color(0xffECF0F1),
-                  minimumSize: Size(330,45),
-                  onPrimary: Colors.black,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(85)
-                  )
-              ),
-              child: Text('Sign Out',
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-              onPressed: (){},
+            style: ElevatedButton.styleFrom(
+                primary: Color(0xffECF0F1),
+                minimumSize: Size(330, 45),
+                onPrimary: Colors.black,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(85))),
+            child: Text(
+              'Sign Out',
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+            ),
+            onPressed: () {},
           ),
         ],
       ),
@@ -673,17 +606,17 @@ class Passwordpage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Change Password',
-          style: TextStyle(
-            color: Colors.black
-          ),
-          ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        leading:
-        IconButton(
-        icon: Icon(Icons.arrow_back_ios_new,
-        color: Colors.black,),
+            title: Text(
+              'Change Password',
+              style: TextStyle(color: Colors.black),
+            ),
+            centerTitle: true,
+            backgroundColor: Colors.white,
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios_new,
+                color: Colors.black,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -794,8 +727,7 @@ class Paymentpage extends StatelessWidget {
                 Navigator.pop(context);
               },
             )),
-        body: Column(
-            children: [
+        body: Column(children: [
           SizedBox(
             height: 50,
           ),
@@ -853,83 +785,64 @@ class Creditcardpage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Add Credit Card',
-          style: TextStyle(
-            color: Colors.black
-          ),
+          title: Text(
+            'Add Credit Card',
+            style: TextStyle(color: Colors.black),
           ),
           backgroundColor: Colors.white,
           centerTitle: true,
-          leading:
-          IconButton(
-            icon: Icon(Icons.arrow_back_ios_new,
-              color: Colors.black,),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+              color: Colors.black,
+            ),
             onPressed: () {
               Navigator.pop(context);
             },
-          )
-      ),
+          )),
       body: Container(
         padding: EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Image.asset('Assets/Images/kredit.png'),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Bank name',
-                style: TextStyle(
-                  color: Colors.black.withOpacity(0.5)
-                ),
-                ),
-                Text('AZRAEN Bank',),
-            ]
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Your name',
-                    style: TextStyle(
-                        color: Colors.black.withOpacity(0.5)
-                    ),
-                  ),
-                  Text('Itoh'),
-                ]
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Card Number',
-                    style: TextStyle(
-                        color: Colors.black.withOpacity(0.5)
-                    ),
-                  ),
-                  Text('4444 3784 1380 6739'),
-                ]
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Data',
-                    style: TextStyle(
-                        color: Colors.black.withOpacity(0.5)
-                    ),
-                  ),
-                  Text('02/22'),
-                ]
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('CVV',
-                    style: TextStyle(
-                        color: Colors.black.withOpacity(0.5)
-                    ),
-                  ),
-                  Text('877'),
-                ]
-            ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Text(
+                'Bank name',
+                style: TextStyle(color: Colors.black.withOpacity(0.5)),
+              ),
+              Text(
+                'AZRAEN Bank',
+              ),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Text(
+                'Your name',
+                style: TextStyle(color: Colors.black.withOpacity(0.5)),
+              ),
+              Text('Itoh'),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Text(
+                'Card Number',
+                style: TextStyle(color: Colors.black.withOpacity(0.5)),
+              ),
+              Text('4444 3784 1380 6739'),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Text(
+                'Data',
+                style: TextStyle(color: Colors.black.withOpacity(0.5)),
+              ),
+              Text('02/22'),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Text(
+                'CVV',
+                style: TextStyle(color: Colors.black.withOpacity(0.5)),
+              ),
+              Text('877'),
+            ]),
             SizedBox(
               height: 200,
             ),
@@ -937,16 +850,13 @@ class Creditcardpage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     primary: Color(0xffD35400),
                     onPrimary: Colors.white,
-                    minimumSize: Size(330,45),
+                    minimumSize: Size(330, 45),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(55)
-                    )
-                ),
+                        borderRadius: BorderRadius.circular(55))),
                 child: Text('Add'),
                 onPressed: () {
                   Navigator.pop(context);
-                }
-            ),
+                }),
           ],
         ),
       ),
@@ -1067,14 +977,9 @@ class Voucherpage extends StatelessWidget {
                     ],
                   ),
                   OutlinedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: CircleBorder()
-                      ),
+                      style: ElevatedButton.styleFrom(shape: CircleBorder()),
                       onPressed: null,
-                      child: Icon(Icons.check,
-                      color: Colors.white
-                      )
-                  ),
+                      child: Icon(Icons.check, color: Colors.white)),
                 ],
               ),
               SizedBox(

@@ -12,6 +12,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: OnboardingView(),
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          elevation: 0,
+          iconTheme: IconThemeData(
+            color: Colors.black
+          )
+        )
+      ),
     );
   }
 }

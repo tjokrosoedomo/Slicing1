@@ -8,15 +8,6 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
-            leading:
-            IconButton(
-              icon: Icon(Icons.arrow_back_ios_new,
-              color: Colors.black,),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            )
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
