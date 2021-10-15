@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'home_view/home_view.dart';
+import 'tab_view/tab_view.dart';
+
+
 
 class SignInView extends StatelessWidget {
   const SignInView({Key? key}) : super(key: key);
@@ -67,7 +69,7 @@ class SignInView extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => Homepage()),
+                    MaterialPageRoute(builder: (context) => Tabpage()),
                   );
                 }),
             Container(
